@@ -1,0 +1,19 @@
+# Credentials & Secrets
+.env
+scripts/authorize.js
+scripts/oauth2.js
+
+# Dependencies & Build artifacts
+node_modules/
+dist/
+scripts/leetcode.js
+.DS_Store
+*.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Exclude documentation and markdown files per requirements
+*.md
+docs/

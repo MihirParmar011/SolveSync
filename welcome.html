@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SolveSync - Getting Started</title>
+    <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+    <link rel="alternate icon" type="image/png" href="assets/icon48.png" />
+    <link rel="stylesheet" href="css/welcome.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Top Nav -->
+    <nav class="welcome-nav">
+      <div class="brand-badge">
+        <div class="brand-icon">
+          <img src="assets/icon.svg" width="20" height="20" alt="SolveSync" />
+        </div>
+        <div class="brand-title">Solve<span>Sync</span></div>
+      </div>
+      <div class="version-pill">v0.1.0</div>
+    </nav>
+
+    <!-- Main Wizard -->
+    <main class="wizard-container">
+      <!-- Stepper -->
+      <div class="step-stepper">
+        <div id="step1_indicator" class="stepper-item active">
+          <div class="stepper-circle">1</div>
+          <span>Connect GitHub</span>
+        </div>
+        <div class="stepper-line"></div>
+        <div id="step2_indicator" class="stepper-item">
+          <div class="stepper-circle">2</div>
+          <span>Select Repository</span>
+        </div>
+        <div class="stepper-line"></div>
+        <div id="step3_indicator" class="stepper-item">
+          <div class="stepper-circle">3</div>
+          <span>Ready to Sync</span>
+        </div>
+      </div>
+
+      <!-- Feedback Messages -->
+      <div
+        id="feedback_error"
+        class="alert-box error"
+        style="display: none; width: 100%; margin-bottom: 20px"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+        <span id="feedback_error_text">Error text</span>
+      </div>
+
+      <div
+        id="feedback_success"
+        class="alert-box success"
+        style="display: none; width: 100%; margin-bottom: 20px"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
+        </svg>
+        <span id="feedback_success_text">Success text</span>
+      </div>
+
+      <!-- STEP 1: Connect GitHub -->
+      <div id="step1_panel" class="step-card">
+        <div class="step-card-header">
+          <h1 class="step-card-title">Welcome to SolveSync</h1>
+          <p class="step-card-subtitle">
+            Connect your GitHub account to automatically track your algorithmic solutions.
+          </p>
+        </div>
+
+        <!-- OAuth Button -->
+        <button id="oauth_connect_btn" class="btn-github">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
+            />
+          </svg>
+          Connect with GitHub (OAuth)
+        </button>
+
+        <div class="divider">or connect with Personal Access Token (PAT)</div>
+
+        <!-- Personal Access Token Alternative -->
+        <div class="form-group">
+          <label class="form-label" for="pat_input">GitHub Personal Access Token</label>
+          <input
+            id="pat_input"
+            class="form-input"
+            type="password"
+            placeholder="ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          />
+          <div style="font-size: 11px; color: var(--text-muted); margin-top: 4px">
+            Token requires <code>repo</code> scope for private or public commits.
+          </div>
+        </div>
+
+        <button id="pat_connect_btn" class="btn-primary-action">Validate & Connect Token</button>
+
+        <div
+          style="
+            font-size: 12px;
+            color: var(--text-muted);
+            background: var(--surface-raised);
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-subtle);
+            margin-top: 14px;
+            line-height: 1.5;
+          "
+        >
+          💡 <strong>Switching accounts?</strong> If using OAuth, ensure you are signed into your
+          target account on
+          <a href="https://github.com" target="_blank" style="color: var(--brand-text)"
+            >github.com</a
+          >, or simply paste the new account's Personal Access Token above.
+        </div>
+
+        <!-- Feature highlights -->
+        <div class="features-grid">
+          <div class="feature-item">
+            <svg
+              class="feature-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+            <div class="feature-title">Instant Auto-Sync</div>
+            <div class="feature-desc">Commits code the second you pass test cases.</div>
+          </div>
+          <div class="feature-item">
+            <svg
+              class="feature-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+            <div class="feature-title">Multi-Platform</div>
+            <div class="feature-desc">LeetCode, GFG, CodeChef, and HackerRank.</div>
+          </div>
+          <div class="feature-item">
+            <svg
+              class="feature-icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            <div class="feature-title">Zero Credentials Stored</div>
+            <div class="feature-desc">Tokens stay exclusively in local extension storage.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Select Repository -->
+      <div id="step2_panel" class="step-card" style="display: none">
+        <div class="step-card-header">
+          <h2 class="step-card-title">Setup Your Repository</h2>
+          <p class="step-card-subtitle">Choose where SolveSync should push your solved problems.</p>
+        </div>
+
+        <!-- Connected Account Card -->
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--surface-raised);
+            border: 1px solid var(--border-subtle);
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 10px">
+            <span class="status-dot pulse"></span>
+            <span style="font-size: 13px; color: var(--text-secondary)"
+              >Authenticated:
+              <strong id="step2_username" style="color: var(--brand-text); font-size: 14px"
+                >@username</strong
+              ></span
+            >
+          </div>
+          <button
+            id="step2_disconnect_btn"
+            type="button"
+            class="btn-secondary-action"
+            style="padding: 4px 10px; font-size: 11px; margin: 0; width: auto"
+          >
+            Switch Account
+          </button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="repo_action_select">Repository Action</label>
+          <select id="repo_action_select" class="form-select">
+            <option value="create">Create a new Private Repository</option>
+            <option value="link">Link an Existing Repository</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="repo_name_group">
+          <label class="form-label" for="repo_name_input">Repository Name</label>
+          <input
+            id="repo_name_input"
+            class="form-input"
+            type="text"
+            placeholder="e.g. coding-solutions"
+            value="coding-solutions"
+          />
+        </div>
+
+        <div class="form-group" id="repo_existing_group" style="display: none">
+          <label class="form-label" for="repo_existing_select">Select Existing Repository</label>
+          <select id="repo_existing_select" class="form-select">
+            <option value="">Loading repositories...</option>
+          </select>
+        </div>
+
+        <button id="setup_repo_btn" class="btn-primary-action">Complete Setup</button>
+
+        <button id="step2_back_btn" class="btn-secondary-action">← Back to Account</button>
+      </div>
+
+      <!-- STEP 3: Success State -->
+      <div id="step3_panel" class="step-card" style="display: none">
+        <div class="step-card-header">
+          <div
+            style="
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              background-color: var(--color-easy-bg);
+              border: 2px solid var(--color-easy);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin: 0 auto 16px auto;
+              color: var(--color-easy);
+            "
+          >
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+            >
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <h2 class="step-card-title">SolveSync is Linked & Active!</h2>
+          <p class="step-card-subtitle">
+            Authenticated as
+            <strong id="step3_username" style="color: var(--text-primary)">@username</strong> and
+            connected to
+            <a
+              id="connected_repo_link"
+              target="_blank"
+              href="#"
+              style="color: var(--brand-text); text-decoration: underline"
+              ><strong id="connected_repo_display">owner/repo</strong></a
+            >
+          </p>
+        </div>
+
+        <div
+          style="
+            background-color: var(--surface-raised);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            font-size: 13px;
+            line-height: 1.6;
+          "
+        >
+          <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 6px">
+            How to start syncing:
+          </div>
+          <ol style="margin-left: 20px; color: var(--text-secondary)">
+            <li>
+              Navigate to any problem on
+              <a target="_blank" href="https://leetcode.com" style="color: var(--brand-text)"
+                >LeetCode</a
+              >.
+            </li>
+            <li>Submit your code in the online editor.</li>
+            <li>
+              When your solution gets accepted, SolveSync automatically pushes your code, README,
+              and performance metrics to GitHub!
+            </li>
+          </ol>
+        </div>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap">
+          <a
+            id="dashboard_link_btn"
+            href="dashboard.html"
+            class="btn-primary-action"
+            style="text-decoration: none"
+          >
+            Open Dashboard
+          </a>
+          <button id="step3_change_repo_btn" type="button" class="btn-secondary-action">
+            Change Repo
+          </button>
+          <button id="step3_switch_btn" type="button" class="btn-secondary-action">
+            Switch Account
+          </button>
+          <button
+            id="unlink_btn"
+            type="button"
+            class="btn-secondary-action"
+            style="color: var(--color-hard)"
+          >
+            Unlink Repo
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="welcome-footer">
+      <span>SolveSync — Synchronize your competitive programming journey to GitHub.</span>
+    </footer>
+
+    <script type="module" src="scripts/welcome.js"></script>
+  </body>
+</html>

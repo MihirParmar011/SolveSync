@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SolveSync - Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+    <link rel="alternate icon" type="image/png" href="assets/icon48.png" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Sidebar Navigation -->
+    <aside class="dash-sidebar">
+      <div>
+        <div class="sidebar-brand">
+          <div class="brand-icon">
+            <img src="assets/icon.svg" width="22" height="22" alt="SolveSync" />
+          </div>
+          <div class="brand-name">Solve<span>Sync</span></div>
+        </div>
+
+        <nav class="sidebar-menu">
+          <button id="nav_overview" class="menu-item active" type="button">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg>
+            <span>Overview</span>
+          </button>
+          <button id="nav_submissions" class="menu-item" type="button">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="4 17 10 11 4 5" />
+              <line x1="12" y1="19" x2="20" y2="19" />
+            </svg>
+            <span>Submissions</span>
+          </button>
+          <button id="nav_settings" class="menu-item" type="button">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+              />
+            </svg>
+            <span>Settings</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-pill-container">
+          <div class="user-pill">
+            <div id="user_avatar" class="user-avatar">GH</div>
+            <div class="user-info">
+              <span id="user_login" class="user-name">GitHub User</span>
+              <span class="user-status">● Connected</span>
+            </div>
+          </div>
+          <div class="user-quick-actions">
+            <button
+              id="sidebar_switch_btn"
+              class="quick-action-btn"
+              type="button"
+              title="Switch GitHub Account"
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M16 3h5v5M4 20L21 3m0 13v5h-5m-6 0H4v-5" />
+              </svg>
+              <span>Switch</span>
+            </button>
+            <button
+              id="sidebar_logout_btn"
+              class="quick-action-btn danger"
+              type="button"
+              title="Log Out / Disconnect"
+            >
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+              </svg>
+              <span>Logout</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="dash-content">
+      <!-- Top Bar -->
+      <header class="dash-topbar">
+        <h1 id="page_heading" class="page-title">Overview</h1>
+        <div class="topbar-actions">
+          <div class="repo-badge-container">
+            <a id="dash_repo_link" class="repo-badge" target="_blank" href="#">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
+                />
+              </svg>
+              <span id="dash_repo_name">owner/repo</span>
+            </a>
+            <a
+              id="dash_repo_change_btn"
+              class="repo-change-btn"
+              href="welcome.html#step2"
+              title="Change or reconfigure repository"
+              style="display: none"
+            >
+              Change
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <!-- VIEW 1: Overview -->
+      <section id="view_overview" style="display: flex; flex-direction: column; gap: 24px">
+        <!-- Repository Unlinked Setup Banner -->
+        <div id="repo_setup_banner" class="repo-alert-banner" style="display: none">
+          <div class="banner-content">
+            <div class="banner-icon">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+            </div>
+            <div>
+              <div class="banner-title">Destination Repository Not Configured</div>
+              <div class="banner-desc">
+                SolveSync is connected to GitHub (@<strong id="banner_username">user</strong>), but
+                no repository is linked yet. Link or create a repository to start auto-syncing
+                solutions.
+              </div>
+            </div>
+          </div>
+          <a href="welcome.html#step2" class="banner-action-btn">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg>
+            <span>Configure Repository</span>
+          </a>
+        </div>
+
+        <!-- Overview Stat Cards -->
+        <div class="stats-overview-grid">
+          <div class="overview-card">
+            <span class="overview-card-title">Total Solved</span>
+            <span id="dash_total" class="overview-card-value">0</span>
+            <span class="overview-card-sub">All platforms</span>
+          </div>
+          <div class="overview-card">
+            <span class="overview-card-title">Easy</span>
+            <span id="dash_easy" class="overview-card-value" style="color: var(--color-easy)"
+              >0</span
+            >
+            <span class="overview-card-sub" style="color: var(--text-muted)">Fundamental</span>
+          </div>
+          <div class="overview-card">
+            <span class="overview-card-title">Medium</span>
+            <span id="dash_medium" class="overview-card-value" style="color: var(--color-medium)"
+              >0</span
+            >
+            <span class="overview-card-sub" style="color: var(--text-muted)"
+              >Interview standard</span
+            >
+          </div>
+          <div class="overview-card">
+            <span class="overview-card-title">Hard</span>
+            <span id="dash_hard" class="overview-card-value" style="color: var(--color-hard)"
+              >0</span
+            >
+            <span class="overview-card-sub" style="color: var(--text-muted)"
+              >Advanced algorithmic</span
+            >
+          </div>
+        </div>
+
+        <!-- Platforms Breakdown -->
+        <div>
+          <h2 style="font-size: 16px; font-weight: 600; margin-bottom: 12px">Platforms</h2>
+          <div class="platform-section-grid">
+            <div class="platform-box">
+              <div class="platform-box-header">
+                <span class="platform-box-name">LeetCode</span>
+                <span style="font-size: 11px; color: var(--color-easy)">Active</span>
+              </div>
+              <div id="dash_plat_lc" class="platform-box-total">0</div>
+            </div>
+            <div class="platform-box">
+              <div class="platform-box-header">
+                <span class="platform-box-name">GeeksForGeeks</span>
+                <span style="font-size: 11px; color: var(--color-easy)">Active</span>
+              </div>
+              <div id="dash_plat_gfg" class="platform-box-total">0</div>
+            </div>
+            <div class="platform-box">
+              <div class="platform-box-header">
+                <span class="platform-box-name">CodeChef</span>
+                <span style="font-size: 11px; color: var(--brand-text)">Ready</span>
+              </div>
+              <div id="dash_plat_codechef" class="platform-box-total">0</div>
+            </div>
+            <div class="platform-box">
+              <div class="platform-box-header">
+                <span class="platform-box-name">HackerRank</span>
+                <span style="font-size: 11px; color: var(--brand-text)">Ready</span>
+              </div>
+              <div id="dash_plat_hr" class="platform-box-total">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Submissions Table -->
+        <div class="card-table-container">
+          <div class="table-header">
+            <span class="table-title">Recent Submissions</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Problem</th>
+                <th>Platform</th>
+                <th>Difficulty</th>
+                <th>Synced</th>
+              </tr>
+            </thead>
+            <tbody id="overview_table_body">
+              <tr>
+                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 24px">
+                  No submissions recorded yet. Start solving problems on LeetCode!
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- VIEW 2: Submissions History -->
+      <section id="view_submissions" style="display: none; flex-direction: column; gap: 20px">
+        <div class="card-table-container">
+          <div class="table-header">
+            <span class="table-title">Full Sync History</span>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Problem</th>
+                <th>Platform</th>
+                <th>Difficulty</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody id="full_history_table_body">
+              <tr>
+                <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 24px">
+                  No submissions found.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- VIEW 3: Settings -->
+      <section id="view_settings" style="display: none; flex-direction: column; gap: 20px">
+        <!-- Card 1: GitHub Account & Connection -->
+        <div class="setting-card">
+          <div class="setting-card-header">
+            <div>
+              <h2 style="font-size: 16px; font-weight: 600">GitHub Account</h2>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 2px">
+                Manage your authenticated GitHub connection and account session.
+              </p>
+            </div>
+            <span class="account-badge connected">
+              <span class="status-dot"></span>
+              Connected
+            </span>
+          </div>
+
+          <div class="account-profile-row">
+            <div class="account-profile-main">
+              <div id="settings_user_avatar" class="user-avatar lg">GH</div>
+              <div class="account-profile-info">
+                <span id="settings_user_login" class="account-profile-name">@username</span>
+                <span class="account-profile-meta"
+                  >Authorized session · <code>repo</code> scope active</span
+                >
+              </div>
+            </div>
+
+            <div class="account-action-buttons">
+              <button id="settings_switch_account_btn" class="btn-action-outline" type="button">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M16 3h5v5M4 20L21 3m0 13v5h-5m-6 0H4v-5" />
+                </svg>
+                Switch Account
+              </button>
+              <button id="settings_logout_btn" class="btn-action-danger" type="button">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+                </svg>
+                Log Out / Disconnect
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Sync Destination Repository -->
+        <div class="setting-card">
+          <div class="setting-card-header">
+            <div>
+              <h2 style="font-size: 16px; font-weight: 600">Destination Repository</h2>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 2px">
+                GitHub repository where SolveSync automatically commits your solutions.
+              </p>
+            </div>
+          </div>
+
+          <div class="repo-config-row">
+            <div class="repo-config-info">
+              <div class="repo-status-pill" id="settings_repo_status_pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
+                  />
+                </svg>
+                <a
+                  id="settings_repo_link"
+                  target="_blank"
+                  href="#"
+                  style="color: inherit; text-decoration: none"
+                >
+                  <strong id="settings_repo_name">owner/repo</strong>
+                </a>
+              </div>
+              <span id="settings_repo_desc" style="font-size: 12px; color: var(--text-muted)">
+                All accepted submissions are synced directly to this repository.
+              </span>
+            </div>
+
+            <div class="repo-action-buttons">
+              <a id="settings_change_repo_btn" href="welcome.html#step2" class="btn-action-outline">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                </svg>
+                Change Repository
+              </a>
+              <button id="setting_unlink_btn" class="btn-action-danger" type="button">
+                Unlink Repository
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Synchronization Preferences -->
+        <div class="setting-card">
+          <h2 style="font-size: 16px; font-weight: 600">Synchronization Preferences</h2>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-title">Auto-Sync on Accepted</span>
+              <span class="setting-desc"
+                >Automatically upload solution files immediately after passing test cases.</span
+              >
+            </div>
+            <input
+              type="checkbox"
+              id="setting_autosync"
+              checked
+              style="accent-color: var(--brand-primary); transform: scale(1.3)"
+            />
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-title">Group by Platform</span>
+              <span class="setting-desc"
+                >Organize repositories by platform folder (e.g.
+                <code>leetcode/two-sum/</code> instead of <code>two-sum/</code>).</span
+              >
+            </div>
+            <input
+              type="checkbox"
+              id="setting_group_platform"
+              style="accent-color: var(--brand-primary); transform: scale(1.3)"
+            />
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <span class="setting-title">Generate stats.json in Repository</span>
+              <span class="setting-desc"
+                >Maintain an updated stats.json file in the repository root for badges and stats
+                cards.</span
+              >
+            </div>
+            <input
+              type="checkbox"
+              id="setting_stats_json"
+              checked
+              style="accent-color: var(--brand-primary); transform: scale(1.3)"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="scripts/dashboard.js"></script>
+  </body>
+</html>

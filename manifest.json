@@ -1,0 +1,92 @@
+{
+  "manifest_version": 3,
+  "name": "SolveSync",
+  "description": "Automatically sync your coding solutions from LeetCode, GeeksForGeeks, HackerRank & CodeChef to GitHub",
+  "homepage_url": "https://github.com/MihirParmar011/SolveSync",
+  "version": "0.1.0",
+  "author": "Mihir Parmar",
+  "action": {
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "SolveSync - Sync Coding Solutions to GitHub"
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "background": {
+    "service_worker": "scripts/background.js"
+  },
+  "permissions": [
+    "unlimitedStorage",
+    "storage",
+    "webNavigation",
+    "alarms"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://leetcode.com/*"
+      ],
+      "js": [
+        "scripts/leetcode.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "scripts/authorize.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://practice.geeksforgeeks.org/*"
+      ],
+      "js": [
+        "scripts/gfg.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.hackerrank.com/*"
+      ],
+      "js": [
+        "scripts/hackerrank.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.codechef.com/*"
+      ],
+      "js": [
+        "scripts/codechef.js"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "welcome.html",
+        "dashboard.html",
+        "popup.html",
+        "assets/*",
+        "css/*"
+      ],
+      "matches": [
+        "https://github.com/*"
+      ]
+    }
+  ]
+}

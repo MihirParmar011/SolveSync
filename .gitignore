@@ -16,4 +16,5 @@ scripts/leetcode.js
 
 # Exclude documentation and markdown files per requirements
 *.md
+!README.md
 docs/
